@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skener — zásady ochrany soukromí</title>
+<meta name="description" content="Jak aplikace Skener nakládá s daty: co posílá, kam, a co si nechává.">
+<meta name="theme-color" content="#1a73e8">
+<meta name="robots" content="index, follow">
+<link rel="icon" href="favicon.png">
+<style>
+  :root {
+    --bg: #f4f6f9; --card: #ffffff; --text: #171a1f; --sub: #5b6674;
+    --primary: #1a73e8; --border: #e3e6ea;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111316; --card: #1c1f24; --text: #eceff3; --sub: #9aa3ad;
+      --primary: #6aa5f5; --border: #2c3138;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 40px 20px 80px; }
+  a { color: var(--primary); }
+  h1 { font-size: 30px; margin: 24px 0 4px; }
+  .datum { color: var(--sub); font-size: 14px; margin: 0 0 28px; }
+  h2 { font-size: 20px; margin: 32px 0 8px; }
+  p, li { color: var(--text); }
+  ul { padding-left: 22px; }
+  .box {
+    background: var(--card); border: 1px solid var(--border);
+    border-left: 4px solid var(--primary);
+    border-radius: 12px; padding: 16px 18px; margin: 20px 0;
+  }
+  .zpet { color: var(--sub); text-decoration: none; font-size: 15px; }
+  footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--sub); font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="zpet" href="./">← Zpět na Skener</a>
+
+<h1>Zásady ochrany soukromí</h1>
+<p class="datum">Aplikace <strong>Skener</strong> pro Android. Platné od 23. 8. 2026.</p>
+
+<div class="box">
+  <strong>Zkráceně:</strong> Skener nemá vlastní server. Naskenované dokumenty putují
+  z tvého telefonu přímo na tvůj Google Disk a nikam jinam. Provozovatel aplikace
+  k nim nemá přístup a nemůže je vidět.
+</div>
+
+<h2>Kdo aplikaci provozuje</h2>
+<p>
+  Skener je nekomerční aplikace vyvíjená soukromou osobou. Není to služba s vlastní
+  infrastrukturou — neběží k ní žádný server, databáze ani analytika.
+</p>
+
+<h2>Jaké údaje aplikace zpracovává</h2>
+<ul>
+  <li><strong>Naskenované dokumenty</strong> — fotografie papíru, které sám pořídíš.
+      Ukládají se dočasně do úložiště aplikace v telefonu a nahrávají se na tvůj
+      Google Disk. Po úspěšném nahrání se z telefonu mažou.</li>
+  <li><strong>Údaje o tvém účtu Google</strong> — e-mailová adresa, jméno a profilový
+      obrázek. Používají se jedině k tomu, aby aplikace uměla ukázat, pod jakým účtem
+      jsi přihlášený. Zůstávají v telefonu.</li>
+  <li><strong>Nastavení</strong> — název cílové složky, volba formátu a podobné
+      předvolby. Zůstávají v telefonu.</li>
+</ul>
+
+<h2>Kam se data posílají</h2>
+<p>
+  Jediným příjemcem dat je <strong>Google Drive API</strong>, tedy tvůj vlastní účet
+  Google. Aplikace nekomunikuje s žádnou jinou službou, neposílá statistiky, nesleduje
+  používání a neobsahuje reklamu ani analytické nástroje třetích stran.
+</p>
+
+<h2>Jaká oprávnění k Disku aplikace má</h2>
+<p>
+  Aplikace žádá výhradně o oprávnění
+  <code>https://www.googleapis.com/auth/drive.file</code>. To je nejužší oprávnění,
+  jaké Google pro práci se soubory nabízí: aplikace uvidí a smí měnit
+  <strong>pouze ty soubory a složky, které sama vytvořila</strong>. Na zbytek tvého
+  Disku — dokumenty, fotky, cokoliv dalšího — nevidí a nemá k němu přístup.
+</p>
+
+<h2>Oprávnění v telefonu</h2>
+<ul>
+  <li><strong>Fotoaparát</strong> — bez něj nejde dokument naskenovat. Snímky se
+      nikam neposílají mimo tvůj Disk.</li>
+</ul>
+
+<h2>Jak dlouho se data drží</h2>
+<p>
+  Naskenovaný soubor je v telefonu jen do chvíle, než se nahraje na Disk; pak se maže.
+  Když zrovna není internet, počká v telefonu do dalšího pokusu. V seznamu v aplikaci
+  zůstává záznam o posledních skenech (název a čas), který si můžeš kdykoli smazat —
+  nebo se smaže sám, když jich přibude víc.
+</p>
+<p>
+  Soubory na Disku jsou od té chvíle tvoje a řídí se
+  <a href="https://policies.google.com/privacy" rel="noopener">zásadami Googlu</a>.
+</p>
+
+<h2>Jak přístup zrušit</h2>
+<p>
+  V aplikaci se stačí odhlásit (Nastavení → Odhlásit). Přístup jde navíc kdykoli
+  odebrat i mimo aplikaci na stránce
+  <a href="https://myaccount.google.com/permissions" rel="noopener">Účet Google → Aplikace
+  třetích stran</a>. Odinstalováním aplikace zmizí z telefonu všechna její data;
+  soubory, které už jsou na Disku, zůstanou.
+</p>
+
+<h2>Děti</h2>
+<p>Aplikace není určena dětem mladším 13 let a nesbírá o nich žádné údaje.</p>
+
+<h2>Změny</h2>
+<p>
+  Kdyby se zpracování dat změnilo, změní se i tahle stránka a datum platnosti nahoře.
+</p>
+
+<footer>
+  <p>Skener · <a href="./">zpět na hlavní stránku</a></p>
+</footer>
+
+</div>
+</body>
+</html>

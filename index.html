@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skener — vyfoť dokument, je na Disku</title>
+<meta name="description" content="Android appka: vyfotíš dokument, sama mu srovná okraje a pošle ho na tvůj Google Disk do složky, kterou si vybereš.">
+<meta name="theme-color" content="#1a73e8">
+<link rel="icon" href="favicon.png">
+
+<!-- Sdílení. og:image MUSÍ být absolutní URL — relativní většina služeb ignoruje. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Skener">
+<meta property="og:title" content="Skener — vyfoť dokument, je na Disku">
+<meta property="og:description" content="Vyfotíš dokument, appka mu srovná okraje a sama ho pošle na tvůj Google Disk.">
+<meta property="og:url" content="https://minsck.github.io/skener-web/">
+<meta property="og:image" content="https://minsck.github.io/skener-web/nahled.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+  :root {
+    --bg: #f4f6f9; --card: #ffffff; --text: #171a1f; --sub: #5b6674;
+    --primary: #1a73e8; --on-primary: #ffffff; --border: #e3e6ea;
+    --ok: #137333; --warn: #b06000;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111316; --card: #1c1f24; --text: #eceff3; --sub: #9aa3ad;
+      --primary: #6aa5f5; --on-primary: #0a1b33; --border: #2c3138;
+      --ok: #7bcf95; --warn: #e2a44f;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  header.hero { padding: 72px 0 48px; text-align: center; }
+  .logo { font-size: 64px; line-height: 1; }
+  h1 { font-size: clamp(32px, 6vw, 48px); margin: 16px 0 8px; letter-spacing: -0.02em; }
+  .lead { font-size: clamp(17px, 2.4vw, 20px); color: var(--sub); margin: 0 auto 28px; max-width: 34em; }
+  .btn {
+    display: inline-block; background: var(--primary); color: var(--on-primary);
+    text-decoration: none; font-weight: 700; font-size: 18px;
+    padding: 16px 32px; border-radius: 14px; border: none;
+  }
+  .btn:hover { filter: brightness(1.08); }
+  .pod-btn { color: var(--sub); font-size: 14px; margin-top: 12px; }
+  section { padding: 40px 0; border-top: 1px solid var(--border); }
+  h2 { font-size: 24px; margin: 0 0 20px; }
+  .mriz { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .karta { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; }
+  .karta h3 { margin: 0 0 6px; font-size: 17px; }
+  .karta p { margin: 0; color: var(--sub); font-size: 15px; }
+  ol.kroky { counter-reset: k; list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+  ol.kroky li { counter-increment: k; display: flex; gap: 14px; align-items: flex-start; }
+  ol.kroky li::before {
+    content: counter(k); flex: 0 0 28px; height: 28px; border-radius: 50%;
+    background: var(--primary); color: var(--on-primary);
+    display: grid; place-items: center; font-weight: 700; font-size: 14px;
+  }
+  details { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
+  details summary { cursor: pointer; font-weight: 600; }
+  details p { color: var(--sub); margin: 10px 0 0; }
+  ul.novinky { margin: 0; padding-left: 20px; color: var(--sub); }
+  #starsi { list-style: none; padding: 0; margin: 16px 0 0; }
+  #starsi li { padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 15px; }
+  #starsi a { color: var(--primary); }
+  footer { padding: 40px 0 60px; color: var(--sub); font-size: 14px; text-align: center; border-top: 1px solid var(--border); }
+  footer a { color: var(--sub); }
+  .skryto { display: none; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="logo">📄</div>
+    <h1>Vyfoť dokument. Je na Disku.</h1>
+    <p class="lead">
+      Otevřeš appku, vyfotíš papír. Sama mu najde okraje, srovná perspektivu a pošle ho
+      na tvůj Google Disk do složky, kterou si vybereš. Nic dalšího nemusíš dělat.
+    </p>
+    <a class="btn apk-link" href="skener-latest.apk" download>⬇️ Stáhnout pro Android</a>
+    <div class="pod-btn">
+      Verze <span class="apk-version">…</span> · APK pro Android · zdarma
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>Co to umí</h2>
+    <div class="mriz">
+      <div class="karta">
+        <h3>Skener, ne fotka</h3>
+        <p>Používá skenovací obrazovku od Googlu — sama najde okraje papíru, srovná
+           perspektivu a papír zesvětlí. Stejná, jakou znáš z Disku.</p>
+      </div>
+      <div class="karta">
+        <h3>Rovnou na Disk</h3>
+        <p>Sken se odešle sám, hned po vyfocení. Do složky, kterou si nastavíš.</p>
+      </div>
+      <div class="karta">
+        <h3>Víc stránek, jedno PDF</h3>
+        <p>Vyfotíš tři strany smlouvy, na Disku je jedno PDF. Nebo si přepni na JPEG,
+           když chceš každou stránku zvlášť.</p>
+      </div>
+      <div class="karta">
+        <h3>Bez signálu se nic neztratí</h3>
+        <p>Když zrovna není internet, sken počká v telefonu a odešle se sám, jakmile
+           signál bude.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Jak to nastavíš</h2>
+    <ol class="kroky">
+      <li><div><strong>Nainstaluj APK.</strong> Android se jednou zeptá, jestli smí
+        instalovat aplikace z tohohle zdroje.</div></li>
+      <li><div><strong>Přihlas se Googlem.</strong> Tím appka dostane právo ukládat
+        soubory na tvůj Disk — samotná e-mailová adresa k tomu nestačí.</div></li>
+      <li><div><strong>Napiš název složky.</strong> Appka ji na Disku založí sama.</div></li>
+      <li><div><strong>Skenuj.</strong> Po spuštění appky se rovnou otevře fotoaparát.</div></li>
+    </ol>
+  </div>
+</section>
+
+<section id="novinky" class="skryto">
+  <div class="wrap">
+    <h2>Co je nového ve verzi <span class="apk-version">…</span></h2>
+    <ul class="novinky"></ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Časté otázky</h2>
+
+    <details>
+      <summary>Proč se musím přihlašovat Googlem? Nestačí zadat e-mail?</summary>
+      <p>Nestačí. E-mailová adresa je jen jméno — právo zapisovat na tvůj Disk vydá
+         Google až po přihlášení. Je to jednou; appka si pak přístup obnovuje sama.</p>
+    </details>
+
+    <details>
+      <summary>Vidí appka na moje soubory na Disku?</summary>
+      <p>Ne. Má nejužší možné oprávnění (<code>drive.file</code>), takže vidí výhradně
+         soubory a složky, které sama vytvořila. Do zbytku Disku se nedostane, ani
+         kdyby chtěla.</p>
+    </details>
+
+    <details>
+      <summary>Mám na Disku složku „Dokumenty". Bude appka ukládat do ní?</summary>
+      <p>Ne — a je to důsledek předchozí odpovědi. Na složku, kterou sis vytvořil sám,
+         appka nevidí, takže si vedle ní založí vlastní se stejným názvem. V nastavení
+         je tlačítko „Otevřít složku na Disku", ať je hned vidět, kam skeny padají.</p>
+    </details>
+
+    <details>
+      <summary>Odesílá appka něco jinam než na můj Disk?</summary>
+      <p>Ne. Nemá vlastní server ani analytiku. Skeny jdou z telefonu rovnou na Google
+         Disk a nikam jinam. Podrobně v <a href="soukromi.html">zásadách soukromí</a>.</p>
+    </details>
+
+    <details>
+      <summary>Proč to není na Google Play?</summary>
+      <p>Je to appka psaná pro sebe a pár lidí kolem, ne produkt. Instaluje se
+         stažením APK z týhle stránky.</p>
+    </details>
+
+    <details id="starsi-box" class="skryto">
+      <summary>Starší verze</summary>
+      <ul id="starsi"></ul>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Skener · <a href="soukromi.html">Zásady soukromí</a></p>
+  </div>
+</footer>
+
+<script>
+/* Verze, novinky a starší verze se berou z GitHub Releases.
+   Tlačítko „Stáhnout" ale VŽDY míří na skener-latest.apk vedle stránky:
+   odkaz na přílohu releasu vede přes přesměrování na podepsanou adresu
+   s omezenou platností, takže stahování, které na mobilu upadne a naváže se
+   později, by skončilo chybou. Tady je to stejný server jako stránka. */
+(function () {
+  var REPO = 'Minsck/skener-web';
+
+  function apkOf(release) {
+    return (release.assets || []).filter(function (a) {
+      return /\.apk$/i.test(a.name);
+    })[0];
+  }
+
+  function verzeZTagu(tag) {
+    return String(tag || '').replace(/^v/, '');
+  }
+
+  fetch('https://api.github.com/repos/' + REPO + '/releases?per_page=30')
+    .then(function (r) { return r.ok ? r.json() : []; })
+    .then(function (releases) {
+      var sApk = (releases || []).filter(apkOf);
+      if (!sApk.length) return;
+
+      var nejnovejsi = sApk[0];
+      var verze = verzeZTagu(nejnovejsi.tag_name);
+
+      Array.prototype.forEach.call(document.querySelectorAll('.apk-version'), function (el) {
+        el.textContent = verze;
+      });
+
+      Array.prototype.forEach.call(document.querySelectorAll('.apk-link'), function (a) {
+        a.href = 'skener-latest.apk?v=' + encodeURIComponent(verze);
+        a.setAttribute('download', 'skener-v' + verze + '.apk');
+      });
+
+      /* Novinky: odrážky z popisu releasu. textContent, ne innerHTML — do popisu
+         releasu se dá napsat cokoliv a na stránce se to nesmí spustit. */
+      var radky = String(nejnovejsi.body || '')
+        .split('\n')
+        .map(function (r) { return r.replace(/^\s*[-*·]\s*/, '').trim(); })
+        .filter(function (r) { return r.length > 0 && !/^https?:\/\//.test(r); });
+
+      if (radky.length) {
+        var ul = document.querySelector('#novinky .novinky');
+        radky.slice(0, 8).forEach(function (r) {
+          var li = document.createElement('li');
+          li.textContent = r;
+          ul.appendChild(li);
+        });
+        document.getElementById('novinky').classList.remove('skryto');
+      }
+
+      var starsi = sApk.slice(1, 11);
+      if (starsi.length) {
+        var seznam = document.getElementById('starsi');
+        starsi.forEach(function (rel) {
+          var a = document.createElement('a');
+          a.href = apkOf(rel).browser_download_url;
+          a.textContent = 'Skener ' + verzeZTagu(rel.tag_name);
+          var li = document.createElement('li');
+          li.appendChild(a);
+          seznam.appendChild(li);
+        });
+        document.getElementById('starsi-box').classList.remove('skryto');
+      }
+    })
+    .catch(function () { /* Bez sítě zůstane tlačítko na skener-latest.apk. */ });
+})();
+</script>
+
+</body>
+</html>
