@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Skener — vyfoť dokument, je na Disku</title>
+<title>DOKUL — vyfoť doklad, je v cloudu</title>
 <meta name="description" content="Android appka: vyfotíš dokument, sama mu srovná okraje a pošle ho na tvůj Google Disk do složky, kterou si vybereš.">
 <meta name="theme-color" content="#1a73e8">
 <link rel="icon" href="favicon.png">
 
 <!-- Sdílení. og:image MUSÍ být absolutní URL — relativní většina služeb ignoruje. -->
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Skener">
-<meta property="og:title" content="Skener — vyfoť dokument, je na Disku">
+<meta property="og:site_name" content="DOKUL">
+<meta property="og:title" content="DOKUL — vyfoť doklad, je v cloudu">
 <meta property="og:description" content="Vyfotíš dokument, appka mu srovná okraje a sama ho pošle na tvůj Google Disk.">
 <meta property="og:url" content="https://minsck.github.io/skener-web/">
 <meta property="og:image" content="https://minsck.github.io/skener-web/nahled.png">
@@ -78,10 +78,11 @@
 <header class="hero">
   <div class="wrap">
     <div class="logo">📄</div>
-    <h1>Vyfoť dokument. Je na Disku.</h1>
+    <h1>Zmáčkni. Doklad je v cloudu.</h1>
     <p class="lead">
-      Otevřeš appku, vyfotíš papír. Sama mu najde okraje, srovná perspektivu a pošle ho
-      na tvůj Google Disk do složky, kterou si vybereš. Nic dalšího nemusíš dělat.
+      Otevřeš appku a koukáš rovnou do foťáku. Jedním stiskem se doklad vyfotí a sám
+      odletí na tvůj Google Disk nebo OneDrive do složky, kterou si vybereš.
+      Nic dalšího nemusíš dělat.
     </p>
     <a class="btn apk-link" href="skener-latest.apk" download>⬇️ Stáhnout pro Android</a>
     <div class="pod-btn">
@@ -95,23 +96,24 @@
     <h2>Co to umí</h2>
     <div class="mriz">
       <div class="karta">
-        <h3>Skener, ne fotka</h3>
-        <p>Používá skenovací obrazovku od Googlu — sama najde okraje papíru, srovná
-           perspektivu a papír zesvětlí. Stejná, jakou znáš z Disku.</p>
+        <h3>Jeden stisk</h3>
+        <p>Hlavní obrazovka je foťák. Namíříš na doklad, zmáčkneš tlačítko a je hotovo —
+           žádné potvrzování, žádné proklikávání. Rovnou můžeš fotit další.</p>
       </div>
       <div class="karta">
-        <h3>Rovnou na Disk</h3>
-        <p>Sken se odešle sám, hned po vyfocení. Do složky, kterou si nastavíš.</p>
-      </div>
-      <div class="karta">
-        <h3>Víc stránek, jedno PDF</h3>
-        <p>Vyfotíš tři strany smlouvy, na Disku je jedno PDF. Nebo si přepni na JPEG,
-           když chceš každou stránku zvlášť.</p>
+        <h3>Rovnou do cloudu</h3>
+        <p>Doklad se odešle sám, hned po vyfocení. Na Google Disk nebo OneDrive,
+           do složky, kterou si nastavíš — klidně vnořené, třeba <code>DF/Petr</code>.</p>
       </div>
       <div class="karta">
         <h3>Bez signálu se nic neztratí</h3>
-        <p>Když zrovna není internet, sken počká v telefonu a odešle se sám, jakmile
-           signál bude.</p>
+        <p>Když zrovna není internet, doklad počká v telefonu a odešle se sám, jakmile
+           signál bude. Appka ti přitom připomene, co ještě neodletělo.</p>
+      </div>
+      <div class="karta">
+        <h3>Galerie na týden</h3>
+        <p>Doklady posledních 7 dní máš v appce po dnech — dají se odtud sdílet nebo
+           znovu poslat do cloudu. Starší se uklidí samy.</p>
       </div>
     </div>
   </div>
@@ -123,10 +125,11 @@
     <ol class="kroky">
       <li><div><strong>Nainstaluj APK.</strong> Android se jednou zeptá, jestli smí
         instalovat aplikace z tohohle zdroje.</div></li>
-      <li><div><strong>Přihlas se Googlem.</strong> Tím appka dostane právo ukládat
-        soubory na tvůj Disk — samotná e-mailová adresa k tomu nestačí.</div></li>
-      <li><div><strong>Napiš název složky.</strong> Appka ji na Disku založí sama.</div></li>
-      <li><div><strong>Skenuj.</strong> Po spuštění appky se rovnou otevře fotoaparát.</div></li>
+      <li><div><strong>Vyber si cloud a přihlas se.</strong> Google Disk, nebo OneDrive.
+        Heslo se do appky nezadává — přihlašuje se okno Googlu, resp. Microsoftu.</div></li>
+      <li><div><strong>Napiš složku.</strong> Třeba <code>DF/Petr</code>. Na Disku si ji
+        appka založí sama.</div></li>
+      <li><div><strong>Foť.</strong> Po spuštění appky koukáš rovnou do foťáku.</div></li>
     </ol>
   </div>
 </section>
@@ -157,15 +160,30 @@
 
     <details>
       <summary>Mám na Disku složku „Dokumenty". Bude appka ukládat do ní?</summary>
-      <p>Ne — a je to důsledek předchozí odpovědi. Na složku, kterou sis vytvořil sám,
-         appka nevidí, takže si vedle ní založí vlastní se stejným názvem. V nastavení
-         je tlačítko „Otevřít složku na Disku", ať je hned vidět, kam skeny padají.</p>
+      <p>Na Google Disku ne — a je to důsledek předchozí odpovědi. Na složku, kterou sis
+         vytvořil sám, appka nevidí, takže si vedle ní založí vlastní se stejným názvem.
+         V nastavení je tlačítko „Otevřít složku", ať je hned vidět, kam doklady padají.
+         <strong>Na OneDrivu tohle omezení není</strong> a ručně vytvořená složka funguje.</p>
     </details>
 
     <details>
-      <summary>Odesílá appka něco jinam než na můj Disk?</summary>
-      <p>Ne. Nemá vlastní server ani analytiku. Skeny jdou z telefonu rovnou na Google
-         Disk a nikam jinam. Podrobně v <a href="soukromi.html">zásadách soukromí</a>.</p>
+      <summary>Odesílá appka něco jinam než do mého cloudu?</summary>
+      <p>Ne. Nemá vlastní server ani analytiku. Doklady jdou z telefonu rovnou na tvůj
+         Google Disk nebo OneDrive a nikam jinam. Podrobně
+         v <a href="soukromi.html">zásadách soukromí</a>.</p>
+    </details>
+
+    <details>
+      <summary>Srovná appka zkosený doklad?</summary>
+      <p>Ne. Dřív to uměla, ale za cenu potvrzovací obrazovky navíc — a hlavní bylo,
+         aby stačil jeden stisk. Doklad proto nafoť rovně; rámeček na obrazovce je
+         vodítko pro oko, neořezává.</p>
+    </details>
+
+    <details>
+      <summary>Jak velké jsou soubory?</summary>
+      <p>Podle nastavení: Malý (~150 dpi), Střední (~200 dpi, výchozí) nebo Velký
+         (~300 dpi). Na účtenku bohatě stačí Střední — je čitelná a soubor zůstane malý.</p>
     </details>
 
     <details>
@@ -183,7 +201,7 @@
 
 <footer>
   <div class="wrap">
-    <p>Skener · <a href="soukromi.html">Zásady soukromí</a></p>
+    <p>DOKUL · <a href="soukromi.html">Zásady soukromí</a></p>
   </div>
 </footer>
 
@@ -221,7 +239,7 @@
 
       Array.prototype.forEach.call(document.querySelectorAll('.apk-link'), function (a) {
         a.href = 'skener-latest.apk?v=' + encodeURIComponent(verze);
-        a.setAttribute('download', 'skener-v' + verze + '.apk');
+        a.setAttribute('download', 'dokul-v' + verze + '.apk');
       });
 
       /* Novinky: odrážky z popisu releasu. textContent, ne innerHTML — do popisu
@@ -247,7 +265,7 @@
         starsi.forEach(function (rel) {
           var a = document.createElement('a');
           a.href = apkOf(rel).browser_download_url;
-          a.textContent = 'Skener ' + verzeZTagu(rel.tag_name);
+          a.textContent = 'DOKUL ' + verzeZTagu(rel.tag_name);
           var li = document.createElement('li');
           li.appendChild(a);
           seznam.appendChild(li);

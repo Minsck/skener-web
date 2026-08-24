@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Skener — zásady ochrany soukromí</title>
-<meta name="description" content="Jak aplikace Skener nakládá s daty: co posílá, kam, a co si nechává.">
+<title>DOKUL — zásady ochrany soukromí</title>
+<meta name="description" content="Jak aplikace DOKUL nakládá s daty: co posílá, kam, a co si nechává.">
 <meta name="theme-color" content="#1a73e8">
 <meta name="robots" content="index, follow">
 <link rel="icon" href="favicon.png">
@@ -43,76 +43,96 @@
 <body>
 <div class="wrap">
 
-<a class="zpet" href="./">← Zpět na Skener</a>
+<a class="zpet" href="./">← Zpět na DOKUL</a>
 
 <h1>Zásady ochrany soukromí</h1>
-<p class="datum">Aplikace <strong>Skener</strong> pro Android. Platné od 23. 8. 2026.</p>
+<p class="datum">Aplikace <strong>DOKUL</strong> pro Android (dříve Skener). Platné od 24. 8. 2026.</p>
 
 <div class="box">
-  <strong>Zkráceně:</strong> Skener nemá vlastní server. Naskenované dokumenty putují
-  z tvého telefonu přímo na tvůj Google Disk a nikam jinam. Provozovatel aplikace
-  k nim nemá přístup a nemůže je vidět.
+  <strong>Zkráceně:</strong> DOKUL nemá vlastní server. Vyfocené doklady putují
+  z tvého telefonu přímo do tvého vlastního cloudu — na Google Disk nebo OneDrive —
+  a nikam jinam. Provozovatel aplikace k nim nemá přístup a nemůže je vidět.
 </div>
 
 <h2>Kdo aplikaci provozuje</h2>
 <p>
-  Skener je nekomerční aplikace vyvíjená soukromou osobou. Není to služba s vlastní
+  DOKUL je nekomerční aplikace vyvíjená soukromou osobou. Není to služba s vlastní
   infrastrukturou — neběží k ní žádný server, databáze ani analytika.
 </p>
 
 <h2>Jaké údaje aplikace zpracovává</h2>
 <ul>
-  <li><strong>Naskenované dokumenty</strong> — fotografie papíru, které sám pořídíš.
-      Ukládají se dočasně do úložiště aplikace v telefonu a nahrávají se na tvůj
-      Google Disk. Po úspěšném nahrání se z telefonu mažou.</li>
-  <li><strong>Údaje o tvém účtu Google</strong> — e-mailová adresa, jméno a profilový
-      obrázek. Používají se jedině k tomu, aby aplikace uměla ukázat, pod jakým účtem
-      jsi přihlášený. Zůstávají v telefonu.</li>
+  <li><strong>Vyfocené doklady</strong> — fotografie papíru, které sám pořídíš.
+      Ukládají se do úložiště aplikace v telefonu a nahrávají se do tvého cloudu.
+      V telefonu zůstávají <strong>7 dní</strong> kvůli galerii, opětovnému odeslání
+      a sdílení; pak se mažou samy. Doklad, který se ještě nepodařilo odeslat,
+      zůstává, dokud neodejde nebo dokud ho sám nesmažeš.</li>
+  <li><strong>Údaje o tvém účtu</strong> (Google, případně Microsoft) — e-mailová
+      adresa, jméno a profilový obrázek. Používají se jedině k tomu, aby aplikace
+      uměla ukázat, pod jakým účtem jsi přihlášený. Zůstávají v telefonu.</li>
+  <li><strong>Přihlašovací token</strong> — u OneDrivu si aplikace ukládá token pro
+      obnovení přihlášení do šifrovaného úložiště systému (Android Keystore), aby ses
+      nemusel přihlašovat pořád dokola. Heslo k účtu aplikace nikdy nevidí ani neukládá.</li>
   <li><strong>Nastavení</strong> — název cílové složky, volba formátu a podobné
       předvolby. Zůstávají v telefonu.</li>
 </ul>
 
 <h2>Kam se data posílají</h2>
 <p>
-  Jediným příjemcem dat je <strong>Google Drive API</strong>, tedy tvůj vlastní účet
-  Google. Aplikace nekomunikuje s žádnou jinou službou, neposílá statistiky, nesleduje
-  používání a neobsahuje reklamu ani analytické nástroje třetích stran.
+  Příjemcem dat je výhradně cloud, který si sám vybereš: <strong>Google Drive API</strong>
+  (tvůj účet Google), nebo <strong>Microsoft Graph</strong> (tvůj OneDrive). Aplikace
+  nekomunikuje s žádnou jinou službou, neposílá statistiky, nesleduje používání
+  a neobsahuje reklamu ani analytické nástroje třetích stran.
 </p>
 
-<h2>Jaká oprávnění k Disku aplikace má</h2>
+<h2>Jaká oprávnění k cloudu aplikace má</h2>
 <p>
-  Aplikace žádá výhradně o oprávnění
+  U <strong>Google Disku</strong> žádá výhradně o oprávnění
   <code>https://www.googleapis.com/auth/drive.file</code>. To je nejužší oprávnění,
   jaké Google pro práci se soubory nabízí: aplikace uvidí a smí měnit
   <strong>pouze ty soubory a složky, které sama vytvořila</strong>. Na zbytek tvého
   Disku — dokumenty, fotky, cokoliv dalšího — nevidí a nemá k němu přístup.
 </p>
+<p>
+  U <strong>OneDrivu</strong> žádá o <code>Files.ReadWrite</code>. Microsoft užší
+  oprávnění pro zápis do vybrané složky nenabízí, takže je tohle nejmenší možné —
+  aplikace ho ale používá jedině k zakládání cílové složky a nahrávání dokladů.
+  Dál <code>User.Read</code> (jméno a e-mail přihlášeného) a <code>offline_access</code>
+  (aby přihlášení vydrželo).
+</p>
 
 <h2>Oprávnění v telefonu</h2>
 <ul>
-  <li><strong>Fotoaparát</strong> — bez něj nejde dokument naskenovat. Snímky se
-      nikam neposílají mimo tvůj Disk.</li>
+  <li><strong>Fotoaparát</strong> — bez něj nejde doklad vyfotit. Snímky se nikam
+      neposílají mimo tvůj cloud.</li>
+  <li><strong>Oznámení</strong> (nepovinné) — jen kvůli připomenutí dokladů, které se
+      zatím nepodařilo odeslat. Když ho odmítneš, aplikace funguje dál a upozorní tě
+      pruhem uvnitř.</li>
 </ul>
 
 <h2>Jak dlouho se data drží</h2>
 <p>
-  Naskenovaný soubor je v telefonu jen do chvíle, než se nahraje na Disk; pak se maže.
-  Když zrovna není internet, počká v telefonu do dalšího pokusu. V seznamu v aplikaci
-  zůstává záznam o posledních skenech (název a čas), který si můžeš kdykoli smazat —
-  nebo se smaže sám, když jich přibude víc.
+  Vyfocený doklad zůstává v telefonu <strong>7 dní</strong> — z toho žije galerie,
+  sdílení a tlačítko „Poslat znovu". Pak se smaže sám, i se záznamem v seznamu.
+  Maže se ale jen to, co je skutečně v cloudu: doklad, který se ještě nepodařilo
+  odeslat, zůstane, dokud neodejde nebo dokud ho sám nesmažeš. Kterýkoli doklad jde
+  z galerie smazat ručně hned.
 </p>
 <p>
-  Soubory na Disku jsou od té chvíle tvoje a řídí se
-  <a href="https://policies.google.com/privacy" rel="noopener">zásadami Googlu</a>.
+  Soubory v cloudu jsou od té chvíle tvoje a řídí se zásadami toho poskytovatele —
+  <a href="https://policies.google.com/privacy" rel="noopener">Googlu</a>, resp.
+  <a href="https://privacy.microsoft.com/privacystatement" rel="noopener">Microsoftu</a>.
 </p>
 
 <h2>Jak přístup zrušit</h2>
 <p>
   V aplikaci se stačí odhlásit (Nastavení → Odhlásit). Přístup jde navíc kdykoli
-  odebrat i mimo aplikaci na stránce
+  odebrat i mimo aplikaci — u Googlu na stránce
   <a href="https://myaccount.google.com/permissions" rel="noopener">Účet Google → Aplikace
-  třetích stran</a>. Odinstalováním aplikace zmizí z telefonu všechna její data;
-  soubory, které už jsou na Disku, zůstanou.
+  třetích stran</a>, u Microsoftu na
+  <a href="https://account.live.com/consent/Manage" rel="noopener">account.live.com</a>.
+  Odinstalováním aplikace zmizí z telefonu všechna její data; soubory, které už jsou
+  v cloudu, zůstanou.
 </p>
 
 <h2>Děti</h2>
@@ -124,7 +144,7 @@
 </p>
 
 <footer>
-  <p>Skener · <a href="./">zpět na hlavní stránku</a></p>
+  <p>DOKUL · <a href="./">zpět na hlavní stránku</a></p>
 </footer>
 
 </div>
