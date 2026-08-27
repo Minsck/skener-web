@@ -13,8 +13,8 @@
 <meta property="og:site_name" content="DOKUL">
 <meta property="og:title" content="DOKUL — vyfoť doklad, je v cloudu">
 <meta property="og:description" content="Vyfotíš dokument, appka mu srovná okraje a sama ho pošle na tvůj Google Disk.">
-<meta property="og:url" content="https://minsck.github.io/skener-web/">
-<meta property="og:image" content="https://minsck.github.io/skener-web/nahled.png">
+<meta property="og:url" content="https://minsck.github.io/dokul-web/">
+<meta property="og:image" content="https://minsck.github.io/dokul-web/nahled.png">
 <meta name="twitter:card" content="summary_large_image">
 
 <style>
@@ -80,11 +80,11 @@
     <div class="logo">📄</div>
     <h1>Zmáčkni. Doklad je v cloudu.</h1>
     <p class="lead">
-      Otevřeš appku a koukáš rovnou do foťáku. Jedním stiskem se doklad vyfotí a sám
-      odletí na tvůj Google Disk nebo OneDrive do složky, kterou si vybereš.
-      Nic dalšího nemusíš dělat.
+      Otevřeš appku a koukáš rovnou do foťáku, který si doklad sám obtáhne. Jedním
+      stiskem se naskenuje — ořízne, srovná a odletí na tvůj Google Disk nebo
+      OneDrive do složky, kterou si vybereš. Nic dalšího nemusíš dělat.
     </p>
-    <a class="btn apk-link" href="skener-latest.apk" download>⬇️ Stáhnout pro Android</a>
+    <a class="btn apk-link" href="dokul-latest.apk" download>⬇️ Stáhnout pro Android</a>
     <div class="pod-btn">
       Verze <span class="apk-version">…</span> · APK pro Android · zdarma
     </div>
@@ -96,9 +96,9 @@
     <h2>Co to umí</h2>
     <div class="mriz">
       <div class="karta">
-        <h3>Jeden stisk</h3>
-        <p>Hlavní obrazovka je foťák. Namíříš na doklad, zmáčkneš tlačítko a je hotovo —
-           žádné potvrzování, žádné proklikávání. Rovnou můžeš fotit další.</p>
+        <h3>Skenuje na jeden stisk</h3>
+        <p>Náhled si doklad sám obtáhne, zmáčkneš tlačítko a je hotovo — ořízne ho,
+           srovná a odešle. Žádné potvrzování, žádné proklikávání. Rovnou fotíš další.</p>
       </div>
       <div class="karta">
         <h3>Rovnou do cloudu</h3>
@@ -111,9 +111,9 @@
            signál bude. Appka ti přitom připomene, co ještě neodletělo.</p>
       </div>
       <div class="karta">
-        <h3>Galerie na týden</h3>
-        <p>Doklady posledních 7 dní máš v appce po dnech — dají se odtud sdílet nebo
-           znovu poslat do cloudu. Starší se uklidí samy.</p>
+        <h3>Galerie, co nezapomíná</h3>
+        <p>Všechny doklady máš v appce srovnané po dnech — dají se odtud sdílet nebo
+           znovu poslat do cloudu. Samy nezmizí; smažeš je, až budeš chtít ty.</p>
       </div>
     </div>
   </div>
@@ -175,9 +175,10 @@
 
     <details>
       <summary>Srovná appka zkosený doklad?</summary>
-      <p>Ne. Dřív to uměla, ale za cenu potvrzovací obrazovky navíc — a hlavní bylo,
-         aby stačil jeden stisk. Doklad proto nafoť rovně; rámeček na obrazovce je
-         vodítko pro oko, neořezává.</p>
+      <p>Ano. Náhled okraje papíru hledá sám a při stisku doklad ořízne a srovná
+         perspektivu — bez jediného potvrzování navíc. Když se okraje najít nedají
+         (potmě, vzorovaný ubrus), pošle se radši celá fotka a appka to napíše, ať
+         o tom víš.</p>
     </details>
 
     <details>
@@ -207,12 +208,12 @@
 
 <script>
 /* Verze, novinky a starší verze se berou z GitHub Releases.
-   Tlačítko „Stáhnout" ale VŽDY míří na skener-latest.apk vedle stránky:
+   Tlačítko „Stáhnout" ale VŽDY míří na dokul-latest.apk vedle stránky:
    odkaz na přílohu releasu vede přes přesměrování na podepsanou adresu
    s omezenou platností, takže stahování, které na mobilu upadne a naváže se
    později, by skončilo chybou. Tady je to stejný server jako stránka. */
 (function () {
-  var REPO = 'Minsck/skener-web';
+  var REPO = 'Minsck/dokul-web';
 
   function apkOf(release) {
     return (release.assets || []).filter(function (a) {
@@ -238,7 +239,7 @@
       });
 
       Array.prototype.forEach.call(document.querySelectorAll('.apk-link'), function (a) {
-        a.href = 'skener-latest.apk?v=' + encodeURIComponent(verze);
+        a.href = 'dokul-latest.apk?v=' + encodeURIComponent(verze);
         a.setAttribute('download', 'dokul-v' + verze + '.apk');
       });
 
@@ -273,7 +274,7 @@
         document.getElementById('starsi-box').classList.remove('skryto');
       }
     })
-    .catch(function () { /* Bez sítě zůstane tlačítko na skener-latest.apk. */ });
+    .catch(function () { /* Bez sítě zůstane tlačítko na dokul-latest.apk. */ });
 })();
 </script>
 
